@@ -38,15 +38,15 @@ table1.appendChild(tbody)// hozzadom a tablehez
 const formSima = document.createElement("form")// letrehozok egy form elemet
 d_form.appendChild(formSima)// hozzadom a form divhez
 const field_elemek = [{ //csinálok egy tombot amiben eltarolom az elemeket
-    f_id : 'author',//fieldnek adok idt (internacionalisba nyomtam)
+    f_id : 'author',//fieldnek givelek idt (americaba been so torom a hungariant)
     f_label : 'Szerző', // labelnek adok nevet
     },
     {
-        f_id :'genre', // fieldnek adok idt (internacionalisba nyomtam)
+        f_id :'genre', // fieldnek givelek idt (americaba been so torom a hungariant)
         f_label : 'Műfaj',// labelnek adok nevet
     },
     {
-        f_id : 'title',//  fieldnek adok idt (internacionalisba nyomtam)
+        f_id : 'title',//  fieldnek givelek idt (americaba been so torom a hungariant)
         f_label : 'Cím',// labelnek adok nevet
     }
 ]
@@ -65,3 +65,5 @@ for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
 const buttonsima = document.createElement("button")// letrehozok egy button elemet
 buttonsima.textContent = "Hozzáadás"// beallitom a szoveget
 formSima.appendChild(buttonsima)// hozzadom a formhoz
+
+

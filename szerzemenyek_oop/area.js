@@ -29,8 +29,8 @@ class Area{
  * 
  */
 class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol szarmazik
-    constructor(cssClass){// letrehozok egy constructort es parameterbe megadok valamit
-        super(cssClass)// meghivom a szulo osztaly konstruktorat
+    constructor(osztaly){// letrehozok egy constructort es parameterbe megadok valamit
+        super(osztaly)// meghivom a szulo osztaly konstruktorat
         const table = document.createElement("table")// letrehozok egy table elemet
         this.div.appendChild(table)// hozzadom a divhez
         const thead = document.createElement("thead")// letrehozok egy thead elemet
@@ -47,4 +47,46 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
         table.appendChild(tbody)// hozzadom a tablehez
 
     }
+}
+
+/**
+ * 
+ */
+class Form extends Area{
+    constructor(osztaly){// letrehozok egy constructort es parameterbe megadok valamit
+        super(osztaly)// meghivom a szulo osztaly konstruktorat
+        const form1 = document.createElement("form")// letrehozok egy form elemet
+        this.div.appendChild(form1)// hozzadom a divhez
+        const field_elemek = [{ //csinálok egy tombot amiben eltarolom az elemeket
+            f_id : 'author',//fieldnek givelek idt (americaba been so torom a hungariant)
+            f_label : 'Szerző', // labelnek adok nevet
+            },
+            {
+                f_id :'genre', // fieldnek givelek idt (americaba been so torom a hungariant)
+                f_label : 'Műfaj',// labelnek adok nevet
+            },
+            {
+                f_id : 'title',//  fieldnek givelek idt (americaba been so torom a hungariant)
+                f_label : 'Cím',// labelnek adok nevet
+            }
+        ]
+        for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
+            const field = div1('field')// letrehozok egy div elemet aminek az osztalya field
+            form1.appendChild(field)// hozzadom a formhoz
+
+            const label = document.createElement("label")// letrehozok egy label elemet
+            label.htmlFor = elem.f_id// beallitom az idjat
+            label.textContent = elem.f_label// beallitom a szoveget
+            field.appendChild(label)// hozzadom a fieldhez
+
+            const input = document.createElement("input")// letrehozok egy input elemet
+            input.id = elem.f_id// beallitom az idjat
+            field.appendChild(document.createElement('br'))// letrehozok egy br elemet es hozzadom a fieldhez
+            field.appendChild(input)// hozzadom a fieldhez
+
+        }
+        const button = document.createElement("button")// letrehozok egy button elemet
+        button.textContent = "Hozzáadás"// beallitom a szoveget
+        form1.appendChild(button)// hozzadom a formhoz
+}
 }
