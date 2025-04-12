@@ -33,3 +33,35 @@ for(const fej of th_ertek){// vegigmegyek a th_ertek tomb elemein
 
 const tbody = document.createElement("tbody")// letrehozok egy tbody elemet
 table1.appendChild(tbody)// hozzadom a tablehez
+
+
+const formSima = document.createElement("form")// letrehozok egy form elemet
+d_form.appendChild(formSima)// hozzadom a form divhez
+const field_elemek = [{ //csinálok egy tombot amiben eltarolom az elemeket
+    f_id : 'author',//fieldnek adok idt (internacionalisba nyomtam)
+    f_label : 'Szerző', // labelnek adok nevet
+    },
+    {
+        f_id :'genre', // fieldnek adok idt (internacionalisba nyomtam)
+        f_label : 'Műfaj',// labelnek adok nevet
+    },
+    {
+        f_id : 'title',//  fieldnek adok idt (internacionalisba nyomtam)
+        f_label : 'Cím',// labelnek adok nevet
+    }
+]
+for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
+    const field = div1("field")// letrehozok egy div elemet aminek az osztalya field
+    formSima.appendChild(field)// hozzadom a formhoz
+    const label = document.createElement("label")// letrehozok egy label elemet
+    label.htmlFor = elem.f_id// beallitom az idjat
+    label.textContent = elem.f_label// beallitom a szoveget
+    field.appendChild(label)// hozzadom a fieldhez
+    const input = document.createElement("input")// letrehozok egy input elemet
+    input.id = elem.f_id// beallitom az idjat
+    field.appendChild(document.createElement("br"))// hozzadok egy sortorest
+    field.appendChild(input)// hozzadom a fieldhez
+}
+const buttonsima = document.createElement("button")// letrehozok egy button elemet
+buttonsima.textContent = "Hozzáadás"// beallitom a szoveget
+formSima.appendChild(buttonsima)// hozzadom a formhoz
