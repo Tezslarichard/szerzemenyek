@@ -57,10 +57,16 @@ for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
     label.htmlFor = elem.f_id// beallitom az idjat
     label.textContent = elem.f_label// beallitom a szoveget
     field.appendChild(label)// hozzadom a fieldhez
+    const br = document.createElement("br")// letrehozok egy sortorest
+    
     const input = document.createElement("input")// letrehozok egy input elemet
     input.id = elem.f_id// beallitom az idjat
     field.appendChild(document.createElement("br"))// hozzadok egy sortorest
     field.appendChild(input)// hozzadom a fieldhez
+    field.appendChild(br)// hozzadom a fieldhez
+    const span_error = document.createElement("span")// letrehozok egy span elemet
+    span_error.className = "error"// beallitom az osztalyt
+    field.appendChild(span_error)// hozzadom a fieldhez
 }
 const buttonsima = document.createElement("button")// letrehozok egy button elemet
 buttonsima.textContent = "Hozzáadás"// beallitom a szoveget
@@ -70,10 +76,24 @@ formSima.appendChild(buttonsima)// hozzadom a formhoz
 formSima.addEventListener("submit", (e) => { //hozzadok egy eventlistenert a formhoz
     e.preventDefault()//form viselkedeset megakadalyozom
     const v_object = {} // letrehozok egy ures objektumot
-    const inputok = e.target.querySelectorAll('input');
+    const inputok = e.target.querySelectorAll('input'); // letrehozok egy valtozot amiben eltarolom az inputokat
+    let valid = true // letrehozok egy valtozot ami alapbol true
     for(const input_f of inputok){ // vegigmegyek az inputokon
+       
+        const error =input_f.parentElement.querySelector('.error')// letrehozok egy valtozot amiben eltarolom az error elemet
+        if(!error){ //ha minden kivan toltve konzolba irja hogy nincs error
+            console.error('Nincs error') // kiirja a konzolba hogy nincs error
+            return //kilep a fuggvenybol
+        }
+        error.textContent = ''// beallitom az error szoveget uresre
+        if(input_f.value === ''){ // ha az inputfield ures
+            error.innerText = 'Ird be mert hianyos'// beallitom az error szoveget
+            valid = false // atallitom falsera false
+        } 
         v_object[input_f.id] = input_f.value;// beallitom az objektum elemeit az inputok idja alapjan
     }
+
+if(valid){ // ha valid
     array.push(v_object)// hozzadom a tombhoz az uj elemet
     const tr = document.createElement("tr")// letrehozok egy tr elemet
     tbody.appendChild(tr)// hozzadom a tbodyhoz
@@ -89,9 +109,7 @@ formSima.addEventListener("submit", (e) => { //hozzadok egy eventlistenert a for
     const cim_cella = document.createElement("td")// letrehozok egy td elemet
     cim_cella.innerText = v_object.title// beallitom a szoveget
     tr.appendChild(cim_cella)// hozzadom a sorhoz
-
-})
-
+}})
 d_container.appendChild(d_table)// hozzadom a table divet a containerhez
 d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 
