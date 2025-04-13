@@ -1,17 +1,23 @@
 //area class megcsinalom
 class Area{
 
-    #div //csinalok egy privat valtozot
+    #div; //csinalok egy privat valtozot
+
+    #manager;//csinalok egy privat valtozot
 
     get div(){// letrehozok egy gettert ami visszaadja a div elemet
         return this.#div// visszaadom a div elemet
     }
 
+    get manager(){// letrehozok egy gettert ami visszaadja a manager elemet
+        return this.#manager// visszaadom a manager elemet
+    }
     /**
      * 
      * @param {string} osztaly majd a vegen irom be
      */
-    constructor(osztaly){//letrehozok egy constructort aminek parameterbe megadom az osztalyt
+    constructor(osztaly,manager){//letrehozok egy constructort aminek parameterbe megadom az osztalyt
+        this.#manager = manager// beallitom a manager privat valtozot
         const container_tar = this.#ContanerDiv()// letrehozok egy valtozot amibe eltarolom a #ContanerDiv visszateresi erteket
         this.#div = document.createElement("div")// letrehozok egy div elemet
         this.#div.className = osztaly// osztalynevet adok neki
@@ -34,12 +40,27 @@ class Area{
  * 
  */
 class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol szarmazik
-    constructor(osztaly){// letrehozok egy constructort es parameterbe megadok valamit
-        super(osztaly)// meghivom a szulo osztaly konstruktorat
-
+    constructor(osztaly , manager){// letrehozok egy constructort es parameterbe megadok valamit
+        super(osztaly,manager)// meghivom a szulo osztaly konstruktorat
         const t_body = this.#tablageneralas()// letrehozok egy valtozot amibe eltarolom a #tablageneralas() visszateresi erteket
 
-        }
+        this.manager.setAddPersonCallBack((pers) => {// beallitom a setAddPersonCallback metodust
+            const tr1 = document.createElement("tr")// letrehozok egy tr elemet
+
+            const nev_cell = document.createElement("td")// letrehozok egy td elemet
+            nev_cell.innerText = pers.szerzo// beallitom a szoveget
+            tr1.appendChild(nev_cell)// hozzadom a sorhoz
+
+            const mufaj_cell = document.createElement("td")// letrehozok egy td elemet
+            mufaj_cell.innerText = pers.mufaj// beallitom a szoveget
+            tr1.appendChild(mufaj_cell)// hozzadom a sorhoz
+
+            const cim_cell = document.createElement("td")// letrehozok egy td elemet    
+            cim_cell.innerText = pers.cim// beallitom a szoveget
+            tr1.appendChild(cim_cell)// hozzadom a sorhoz
+            t_body.appendChild(tr1)// hozzadom a tbodyhoz
+        })
+    }
 
         #tablageneralas(){ //letrehozok egy tablageneralas privat metodust
         const table = document.createElement("table")// letrehozok egy table elemet
@@ -65,9 +86,9 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
 /**
  * 
  */
-class Form extends Area{
-    constructor(osztaly,field_elemek){// letrehozok egy constructort es parameterbe megadok valamit
-        super(osztaly)// meghivom a szulo osztaly konstruktorat
+class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol szarmazik
+    constructor(osztaly,field_elemek,manager){// letrehozok egy constructort es parameterbe megadok valamit
+        super(osztaly,manager)// meghivom a szulo osztaly konstruktorat
         const form1 = document.createElement("form")// letrehozok egy form elemet
         this.div.appendChild(form1)// hozzadom a divhez
         
@@ -89,5 +110,18 @@ class Form extends Area{
         const button = document.createElement("button")// letrehozok egy button elemet
         button.textContent = "Hozzáadás"// beallitom a szoveget
         form1.appendChild(button)// hozzadom a formhoz
+
+        form1.addEventListener("submit", (e) => {// letrehozok egy eventlistnert
+            e.preventDefault() // megakadalyozom a form viselkedeset
+
+            const inputok1 = e.target.querySelectorAll("input")// letrehozok egy valtozot amibe eltarolom az inputokat
+            const elemek = {}// letrehozok egy ures tombot amibe eltarolom az inputokat
+            for(const futo of inputok1){// vegigmegyek az inputokon
+                elemek[futo.id] = futo.value// beallitom az idjat es a valuejat
+            }
+            const uj_elemek = new Person(elemek.author,elemek.genre,elemek.title)// letrehozok egy uj elemet
+            this.manager.addPerson(uj_elemek)// hozzadom a managerhez
+
+        })
 }
 }

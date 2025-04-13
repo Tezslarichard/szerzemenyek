@@ -14,5 +14,6 @@ const fieldek = [{ //csinálok egy tombot amiben eltarolom az elemeket
         f_label : 'Cím',// labelnek adok nevet
     }
 ]
-const tableoop = new Table('table')//letrehozok egy table peldanyt
-const formoop = new Form('form',fieldek)//letrehozok egy form area peldanyt
+const manageroop = new Manager()//letrehozok egy manager peldanyt
+const tableoop = new Table('table',manageroop)//letrehozok egy table peldanyt
+const formoop = new Form('form',fieldek,manageroop)//letrehozok egy form area peldanyt
