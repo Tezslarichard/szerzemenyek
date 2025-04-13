@@ -87,24 +87,17 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
  * 
  */
 class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol szarmazik
+    #formFieldArray; //letrehozok egy privat valtozot
     constructor(osztaly,field_elemek,manager){// letrehozok egy constructort es parameterbe megadok valamit
         super(osztaly,manager)// meghivom a szulo osztaly konstruktorat
+        this.#formFieldArray = [] // letrehozok egy ures tombot
         const form1 = document.createElement("form")// letrehozok egy form elemet
         this.div.appendChild(form1)// hozzadom a divhez
         
         for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
-            const field = div1('field')// letrehozok egy div elemet aminek az osztalya field
-            form1.appendChild(field)// hozzadom a formhoz
-
-            const label = document.createElement("label")// letrehozok egy label elemet
-            label.htmlFor = elem.f_id// beallitom az idjat
-            label.textContent = elem.f_label// beallitom a szoveget
-            field.appendChild(label)// hozzadom a fieldhez
-
-            const input = document.createElement("input")// letrehozok egy input elemet
-            input.id = elem.f_id// beallitom az idjat
-            field.appendChild(document.createElement('br'))// letrehozok egy br elemet es hozzadom a fieldhez
-            field.appendChild(input)// hozzadom a fieldhez
+            const f_Field = new FormField(elem.f_id,elem.f_label)// letrehozok egy FormField elemet
+            this.#formFieldArray.push(f_Field)// hozzadom a formFieldArrayhoz
+            form1.appendChild(f_Field.getDiv())// hozzadom a formhoz
 
         }
         const button = document.createElement("button")// letrehozok egy button elemet
@@ -119,9 +112,52 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
             for(const futo of inputok1){// vegigmegyek az inputokon
                 elemek[futo.id] = futo.value// beallitom az idjat es a valuejat
             }
-            const uj_elemek = new Person(elemek.author,elemek.genre,elemek.title)// letrehozok egy uj elemet
+            const uj_elemek = new Person(elemek.author,elemek.genre,elemek.title)// letrehozok egy uj person objektumot az elemek adatai alpjan
             this.manager.addPerson(uj_elemek)// hozzadom a managerhez
 
         })
+
 }
+}
+
+class FormField{ // letrehozok egy FormField osztalyt
+    #id; // privat valtozo
+    #inputElemek; // privat valtozo
+    #labelElemek; // privat valtozo
+    #errorElemek; // privat valtozo
+
+    get id(){//csinalok egy gettert
+        return this.#id // getter ami visszaadja az idt
+    }
+
+    get ertek(){//csinalok egy gettert
+        return this.#inputElemek.value // getter ami visszaadja az input elemet
+    }
+
+    set error(ertek){ // csinalok egy settert
+        this.#errorElemek.textContent = ertek // beallitom az error elemet
+    }
+
+    constructor(id,label){ // letrehozok egy constructort
+    this.#id = id // beallitom az idt
+    this.#labelElemek = document.createElement("label") // letrehozok egy label elemet
+    this.#labelElemek.htmlFor = id // beallitom az idjat
+    this.#labelElemek.textContent = label // beallitom a szoveget
+    this.#inputElemek = document.createElement("input") // letrehozok egy input elemet
+    this.#inputElemek.id = id // beallitom az idjat
+    this.#errorElemek = document.createElement("span") // letrehozok egy span elemet
+    this.#errorElemek.className = "error" // beallitom az osztalyt    
+    }
+
+    getDiv(){// // letrehozok egy metodust
+        const div2 = div1("field") // letrehozok egy div elemet aminek az osztalya field
+        const br1 = document.createElement("br") // letrehozok egy br elemet
+        const br2 = document.createElement("br") // letrehozok egy br elemet
+        const htmlElemek = [this.#labelElemek,br1,this.#inputElemek,br2,this.#errorElemek] // letrehozok egy tombot amibe eltarolom az elemeket
+        for(const elem of htmlElemek){ // vegigmegyek az elemek tomb elemein
+            div2.appendChild(elem) // hozzadom a divhez
+        }
+        return div2 // visszaadom a div elemet
+    }
+    
 }
