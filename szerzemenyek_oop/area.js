@@ -12,17 +12,22 @@ class Area{
      * @param {string} osztaly majd a vegen irom be
      */
     constructor(osztaly){//letrehozok egy constructort aminek parameterbe megadom az osztalyt
+        const container_tar = this.#ContanerDiv()// letrehozok egy valtozot amibe eltarolom a #ContanerDiv visszateresi erteket
+        this.#div = document.createElement("div")// letrehozok egy div elemet
+        this.#div.className = osztaly// osztalynevet adok neki
+        d_container.appendChild(this.#div)// hozzadom a containeroop divhez
+    
+    }
+        #ContanerDiv(){ //letrehozok egy ContanerDiv privat metodust
         let d_container = document.querySelector('.containeroop')// letrehozok egy divet aminek az osztalya containeroop
         if(!d_container){ // ha nem letezik a containeroop osztalyu div
             d_container = document.createElement("div")// letrehozok egy div elemet
             d_container.className = "containeroop"// osztalynevet adok neki
             document.body.appendChild(d_container)// hozzadom a bodyhoz
         }
-
-        this.#div = document.createElement("div")// letrehozok egy div elemet
-        this.#div.className = osztaly// osztalynevet adok neki
-        d_container.appendChild(this.#div)// hozzadom a containeroop divhez
-    }
+        return d_container //visszaadom a div elemet
+       }
+    
 }
 
 /**
@@ -31,6 +36,12 @@ class Area{
 class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol szarmazik
     constructor(osztaly){// letrehozok egy constructort es parameterbe megadok valamit
         super(osztaly)// meghivom a szulo osztaly konstruktorat
+
+        const t_body = this.#tablageneralas()// letrehozok egy valtozot amibe eltarolom a #tablageneralas() visszateresi erteket
+
+        }
+
+        #tablageneralas(){ //letrehozok egy tablageneralas privat metodust
         const table = document.createElement("table")// letrehozok egy table elemet
         this.div.appendChild(table)// hozzadom a divhez
         const thead = document.createElement("thead")// letrehozok egy thead elemet
@@ -46,30 +57,20 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
         const tbody = document.createElement("tbody")// letrehozok egy tbody elemet
         table.appendChild(tbody)// hozzadom a tablehez
 
+        return tbody// visszaadom a tbody elemet
+        }
     }
-}
+
 
 /**
  * 
  */
 class Form extends Area{
-    constructor(osztaly){// letrehozok egy constructort es parameterbe megadok valamit
+    constructor(osztaly,field_elemek){// letrehozok egy constructort es parameterbe megadok valamit
         super(osztaly)// meghivom a szulo osztaly konstruktorat
         const form1 = document.createElement("form")// letrehozok egy form elemet
         this.div.appendChild(form1)// hozzadom a divhez
-        const field_elemek = [{ //csinálok egy tombot amiben eltarolom az elemeket
-            f_id : 'author',//fieldnek givelek idt (americaba been so torom a hungariant)
-            f_label : 'Szerző', // labelnek adok nevet
-            },
-            {
-                f_id :'genre', // fieldnek givelek idt (americaba been so torom a hungariant)
-                f_label : 'Műfaj',// labelnek adok nevet
-            },
-            {
-                f_id : 'title',//  fieldnek givelek idt (americaba been so torom a hungariant)
-                f_label : 'Cím',// labelnek adok nevet
-            }
-        ]
+        
         for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
             const field = div1('field')// letrehozok egy div elemet aminek az osztalya field
             form1.appendChild(field)// hozzadom a formhoz
