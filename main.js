@@ -1,3 +1,4 @@
+const array = [] // letrehozok egy tombot
 const div1 = (osztaly)  => { //div1 valtozoba eltarolok egy arrow functiont , parameterbe megadom az osztalyt
     const div = document.createElement("div")// letrehozok egy div elemet
     div.className = osztaly// osztalynevet adok neki
@@ -9,8 +10,7 @@ document.body.appendChild(d_container)// hozzadom a bodyhoz
 const d_table = div1("table")// letrehozok egy divet aminek az osztalya table
 const d_form = div1("form")//letrehozok egy divet aminek az osztalya form
 
-d_container.appendChild(d_table)// hozzadom a table divet a containerhez
-d_container.appendChild(d_form)// hozzadom a form divet a containerhez
+
 
 
 
@@ -66,4 +66,32 @@ const buttonsima = document.createElement("button")// letrehozok egy button elem
 buttonsima.textContent = "Hozzáadás"// beallitom a szoveget
 formSima.appendChild(buttonsima)// hozzadom a formhoz
 
+
+formSima.addEventListener("submit", (e) => { //hozzadok egy eventlistenert a formhoz
+    e.preventDefault()//form viselkedeset megakadalyozom
+    const v_object = {} // letrehozok egy ures objektumot
+    const inputok = e.target.querySelectorAll('input');
+    for(const input_f of inputok){ // vegigmegyek az inputokon
+        v_object[input_f.id] = input_f.value;// beallitom az objektum elemeit az inputok idja alapjan
+    }
+    array.push(v_object)// hozzadom a tombhoz az uj elemet
+    const tr = document.createElement("tr")// letrehozok egy tr elemet
+    tbody.appendChild(tr)// hozzadom a tbodyhoz
+
+    const nev_cella = document.createElement("td")// letrehozok egy td elemet
+    nev_cella.innerText = v_object.author// beallitom a szoveget
+    tr.appendChild(nev_cella)// hozzadom a sorhoz
+
+    const mufaj_cella = document.createElement("td")// letrehozok egy td elemet
+    mufaj_cella.innerText = v_object.genre// beallitom a szoveget
+    tr.appendChild(mufaj_cella)// hozzadom a sorhoz
+
+    const cim_cella = document.createElement("td")// letrehozok egy td elemet
+    cim_cella.innerText = v_object.title// beallitom a szoveget
+    tr.appendChild(cim_cella)// hozzadom a sorhoz
+
+})
+
+d_container.appendChild(d_table)// hozzadom a table divet a containerhez
+d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 
