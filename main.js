@@ -113,7 +113,6 @@ if(valid){ // ha valid
 d_container.appendChild(d_table)// hozzadom a table divet a containerhez
 d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 
-
 const fajl_input = document.createElement("input")// letrehozok egy input elemet
 d_container.appendChild(fajl_input)// hozzadom a containerhez
 fajl_input.type = "file"// beallitom a tipusat
@@ -153,7 +152,6 @@ fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
     }
 }
 fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
-
 })
 
 
