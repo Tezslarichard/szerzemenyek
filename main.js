@@ -4,6 +4,15 @@ const div1 = (osztaly)  => { //div1 valtozoba eltarolok egy arrow functiont , pa
     div.className = osztaly// osztalynevet adok neki
     return div //visszaadom a div elemet
 }
+const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami parameterbe kap egy tombot es egy callbacket
+    const eredmeny = [] // letrehozok egy tombot
+    for(const pers of pers_Array){// vegigmegyek a tomb elemein
+        if(callback(pers)){//ha callback igaz akkor
+            eredmeny.push(pers)// hozzadom a tombhoz
+        }
+    }
+    return eredmeny // visszaadom a tombot
+}
 
 const d_container = div1("container") // letrehozok egy divet aminek az osztalya container
 document.body.appendChild(d_container)// hozzadom a bodyhoz
@@ -170,4 +179,92 @@ const exportgomb = document.createElement('button') //letrehozok egy button elem
      URL.revokeObjectURL(link.href) // meghivom a revokeObjectURL fuggvenyt
  })
 
+ const szures_F_div = div1("filterForm")// letrehozok egy divet aminek az osztalya szures_F_div
+ d_container.appendChild(szures_F_div)// hozzadom a containerhez
 
+ const formForSzures = document.createElement("form")// letrehozok egy form elemet
+szures_F_div.appendChild(formForSzures)// hozzadom a szures_F_divhez
+
+const kivalaszt = document.createElement("select")// letrehozok egy select elemet
+formForSzures.appendChild(kivalaszt)// hozzadom a formhoz
+
+const opciok = [{// letrehozok egy tombot amiben eltarolom az opciokat
+    ertek:'author', //beallitom az erteket
+    innerText:'Szerző'  // beallitom a szoveget
+},
+{ 
+    ertek:'genre',  // beallitom az erteket
+    innerText:'Műfaj'   // beallitom a szoveget
+},  
+{   
+    ertek:'title',  // beallitom az erteket
+    innerText:'Cím' // beallitom a szoveget
+},  
+{   
+    ertek: '',  //ez egy ures opcio lesz
+    innerText:''  // beallitom a szoveget uresre  
+}
+]
+
+for(const opcio of opciok){// vegigmegyek az opciok tomb elemein
+    const option = document.createElement("option")// letrehozok egy option elemet
+    option.value = opcio.ertek// beallitom az erteket
+    option.innerText = opcio.innerText// beallitom a szoveget
+    kivalaszt.appendChild(option)// hozzadom a selecthez
+}
+
+const input_szures = document.createElement("input")// letrehozok egy input elemet
+input_szures.id = 'szures_input'// beallitom az idjat
+formForSzures.appendChild(input_szures)// hozzadom a formhoz
+
+const szures_gomb = document.createElement("button")// letrehozok egy button elemet
+szures_gomb.innerText = 'Szűrés'// beallitom a szoveget
+formForSzures.appendChild(szures_gomb)// hozzadom a formhoz
+
+formForSzures.addEventListener("submit", (e) => {// letrehozok egy eventlistenert a formhoz
+    e.preventDefault()// megakadalyozom a form viselkedeset
+    const szuroinput = document.querySelector('#szures_input')// letrehozok egy valtozot amiben eltarolom a szuroinputot
+    const select = e.target.querySelector('select')// letrehozok egy valtozot amiben eltarolom a selectet
+
+    const kivalasztott_array = szures(array, (elem) => {// letrehozok egy valtozot amiben eltarolom a kivalasztott tombot
+        if(select.value === 'author'){// ha a select valueja author
+            if(szuroinput.value === elem.szerzo){// ha a szuroinput valueja megegyezik a szerzovel
+                return true //true-t ad vissza
+        }
+    }else if(select.value === 'genre'){// ha a select valueja genre
+        if(szuroinput.value === elem.mufaj){// ha a szuroinput valueja megegyezik a mufajjal
+            return true //true-t ad vissza
+        }
+    }
+    else if(select.value === 'title'){// ha a select valueja title
+        if(szuroinput.value === elem.cim){// ha a szuroinput valueja megegyezik a cimmel
+            return true //true-t ad vissza
+        }
+    }
+    else{ //vagy ha ures
+        return true //true-t ad vissza
+    }
+
+    })
+
+
+tbody.innerHTML = ''// uresre allitom a tbodyt
+
+for(const elem of kivalasztott_array){// vegigmegyek a kivalasztott tomb elemein
+    const tr = document.createElement("tr")// letrehozok egy tr elemet
+    tbody.appendChild(tr)// hozzadom a tbodyhoz
+
+    const nev_cell2 = document.createElement("td")// letrehozok egy td elemet
+    nev_cell2.innerText = elem.szerzo || elem.author// beallitom a szoveget megint minden esetet beirok inkabb
+    tbody.appendChild(nev_cell2)// hozzadom a tbodyhoz
+
+    const mufaj_cell2 = document.createElement("td")// letrehozok egy td elemet
+    mufaj_cell2.innerText = elem.mufaj || elem.genre// beallitom a szoveget megint minden esetet beirok inkabb
+    tbody.appendChild(mufaj_cell2)// hozzadom a tbodyhoz
+
+    const cim_cell2 = document.createElement("td")// letrehozok egy td elemet
+    cim_cell2.innerText = elem.cim || elem.title// beallitom a szoveget megint minden esetet beirok inkabb
+    tbody.appendChild(cim_cell2)// hozzadom a tbodyhoz
+
+}
+})
