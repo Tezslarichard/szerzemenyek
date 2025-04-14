@@ -125,6 +125,34 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
 
 }
 }
+/**
+ * 
+ */
+class Feltoltes extends Area{// letrehozok egy Feltoltes osztalyt ami az Area osztalybol szarmazik
+    constructor(osztaly,manager){// letrehozok egy constructort
+        super(osztaly,manager)//meghivom a szulo osztaly konstruktorat
+        const input = document.createElement("input")// letrehozok egy input elemet
+        input.id = "file"// beallitom az idjat
+        input.type = "file"// beallitom a tipusat
+        this.div.appendChild(input)// hozzadom a divhez
+        input.addEventListener("change", (e) => {// letrehozok egy eventlistnert
+            const fajl = e.target.files[0]; // letrehozok egy valtozot amibe eltarolom a fajlt
+            const fajlolvaso = new FileReader();//letrehozok egy fajl olvasot
+            fajlolvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
+               const sorok1 = fajlolvaso.result.split('\n')//letrehozok egy valtozot amibe eltarolom az elemeket
+               const levagott_elemek = sorok1.slice(1);//letrehozok egy valtozot amibe eltarolom a levagott elemeket
+               for(const sor of levagott_elemek){//vegigmegyek a tomb elemein
+                    const vagott_sor = sor.trim();//letrehozok egy valtozot amibe eltarolom a levagott elemeket
+                    const fields = vagott_sor.split(';');//letrehozok egy valtozot amibe eltarolom a sze szedett elemeket
+                    const person = new Person(fields[0],fields[1],fields[2])//letrehozok egy uj person objektumot az elemek adatai alpjan
+                    this.manager.addPerson(person)//hozzadom a managerhez
+               }
+        
+            }    
+            fajlolvaso.readAsText(fajl)// beallitom a fajl olvasot
+        })
+    }
+}
 
 class FormField{ // letrehozok egy FormField osztalyt
     #id; // privat valtozo
