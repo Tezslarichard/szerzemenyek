@@ -17,4 +17,4 @@ const fieldek = [{ //csinálok egy tombot amiben eltarolom az elemeket
 const manageroop = new Manager()//letrehozok egy manager peldanyt
 const tableoop = new Table('table',manageroop)//letrehozok egy table peldanyt
 const formoop = new Form('form',fieldek,manageroop)//letrehozok egy form area peldanyt
-const fajl_feltoltes = new Feltoltes('fajl_feltoltes',manageroop)//letrehozok egy fajl_feltoltes peldanyt
+const fajl_feltoltes = new Feltoltes_Letoltes('fajl_feltoltes',manageroop)//letrehozok egy fajl_feltoltes peldanyt

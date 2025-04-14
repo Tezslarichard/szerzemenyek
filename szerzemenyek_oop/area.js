@@ -128,7 +128,7 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
 /**
  * 
  */
-class Feltoltes extends Area{// letrehozok egy Feltoltes osztalyt ami az Area osztalybol szarmazik
+class Feltoltes_Letoltes extends Area{// letrehozok egy Feltoltes osztalyt ami az Area osztalybol szarmazik
     constructor(osztaly,manager){// letrehozok egy constructort
         super(osztaly,manager)//meghivom a szulo osztaly konstruktorat
         const input = document.createElement("input")// letrehozok egy input elemet
@@ -151,6 +151,18 @@ class Feltoltes extends Area{// letrehozok egy Feltoltes osztalyt ami az Area os
             }    
             fajlolvaso.readAsText(fajl)// beallitom a fajl olvasot
         })
+    const exportgomb = document.createElement('button') //letrehozok egy button elemet
+    exportgomb.textContent = 'Letöltés' //beallitom a szoveget
+    this.div.appendChild(exportgomb) //hozzadom a containerhez
+    exportgomb.addEventListener('click', () => {   // letrehozok egy eventlistenert a gombhoz
+     const link = document.createElement('a') // letrehozok egy a elemet
+     const kontent = this.manager.generateExportString() // letrehozok egy valtozot amibe eltarolom a manager export stringjet
+     const fajl2 = new Blob([kontent]) // letrehozok egy fajlt amiben eltarolom a fajl szoveget
+     link.href = URL.createObjectURL(fajl2) // beallitom a linket
+     link.download = 'newdata.csv' // beallitom a letoltesi nevet
+     link.click() //meghivom a click fuggvenyt
+     URL.revokeObjectURL(link.href) // meghivom a revokeObjectURL fuggvenyt
+ })
     }
 }
 class FormField{ // letrehozok egy FormField osztalyt
