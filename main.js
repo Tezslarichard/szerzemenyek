@@ -153,5 +153,21 @@ fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
 }
 fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
 })
+const exportgomb = document.createElement('button') //letrehozok egy button elemet
+ exportgomb.textContent = 'Letöltés' //beallitom a szoveget
+ d_container.appendChild(exportgomb) //hozzadom a containerhez
+ exportgomb.addEventListener('click', () => {   // letrehozok egy eventlistenert a gombhoz
+     const link = document.createElement('a') // letrehozok egy a elemet
+     const kontent_Array = ['Szerző;Műfaj;Cím'] // letrehozok egy tombot amiben eltarolom a szoveget
+     for(const pers of array){ // vegigmegyek a tomb elemein
+        kontent_Array.push(`${pers.szerzo || pers.author };${pers.mufaj || pers.genre };${pers.cim || pers.title }`) // beallitom a tomb elemeit, kicsit furan van megoldva mert kesze kuszan csinaltam a cim es a title keveredik igy lefedem az osszes lehetoseget
+     }
+     const kontent = kontent_Array.join('\n') // letrehozok egy valtozot amiben eltarolom a tomb elemeit
+     const fajl2 = new Blob([kontent]) // letrehozok egy fajlt amiben eltarolom a fajl szoveget
+     link.href = URL.createObjectURL(fajl2) // beallitom a linket
+     link.download = 'newdata.csv' // beallitom a letoltesi nevet
+     link.click() //meghivom a click fuggvenyt
+     URL.revokeObjectURL(link.href) // meghivom a revokeObjectURL fuggvenyt
+ })
 
 
