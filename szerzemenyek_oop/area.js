@@ -153,7 +153,6 @@ class Feltoltes extends Area{// letrehozok egy Feltoltes osztalyt ami az Area os
         })
     }
 }
-
 class FormField{ // letrehozok egy FormField osztalyt
     #id; // privat valtozo
     #inputElemek; // privat valtozo
