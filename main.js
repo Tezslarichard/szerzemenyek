@@ -113,3 +113,47 @@ if(valid){ // ha valid
 d_container.appendChild(d_table)// hozzadom a table divet a containerhez
 d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 
+
+const fajl_input = document.createElement("input")// letrehozok egy input elemet
+d_container.appendChild(fajl_input)// hozzadom a containerhez
+fajl_input.type = "file"// beallitom a tipusat
+fajl_input.addEventListener("change", (e) => {// letrehozok egy eventlistenert
+const fajl = e.target.files[0]// letrehozok egy valtozot amiben eltarolom a fajlt
+const fajl_olvaso = new FileReader()// letrehozok egy fajl olvasot
+fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
+    const sorok = fajl_olvaso.result.split('\n')// letrehozok egy valtozot amiben eltarolom a sorokat
+    const felvagott = sorok.slice(1)// letrehozok egy valtozot amiben eltarolom a felvagott elemeket
+
+    for(const sor of felvagott){// vegigmegyek a felvagott elemein a sor
+        const felvagottak = sor.trim() // letrehozok egy valtozot amiben eltarolom a felvagott elemeket
+        const fields = felvagottak.split(';')// letrehozok egy valtozot amiben eltarolom a felvagott elemeket
+
+        const pers = { //// letrehozok egy valtozot amiben eltarolom a felvagott elemeket
+            szerzo: fields[0],// beallitom a szerzot
+            mufaj: fields[1],// beallitom a mufajt
+            cim: fields[2]// beallitom a cimet
+        }
+        array.push(pers)// hozzadom a tombhoz az uj elemet
+
+        const tr1 = document.createElement("tr")// letrehozok egy tr elemet
+        tbody.appendChild(tr1)// hozzadom a tbodyhoz
+
+        const nev_cell1 = document.createElement("td")// letrehozok egy td elemet
+        nev_cell1.innerText = pers.szerzo// beallitom a szoveget
+        tbody.appendChild(nev_cell1)// hozzadom a tbodyhoz
+
+        const mufaj_cell1 = document.createElement("td")// letrehozok egy td elemet
+        mufaj_cell1.innerText = pers.mufaj// beallitom a szoveget
+        tbody.appendChild(mufaj_cell1)// hozzadom a tbodyhoz
+
+        const cim_cell1 = document.createElement("td")// letrehozok egy td elemet
+        cim_cell1.innerText = pers.cim// beallitom a szoveget
+        tbody.appendChild(cim_cell1)// hozzadom a tbodyhoz
+
+    }
+}
+fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
+
+})
+
+
