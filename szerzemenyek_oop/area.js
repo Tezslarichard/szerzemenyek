@@ -106,16 +106,22 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
 
         form1.addEventListener("submit", (e) => {// letrehozok egy eventlistnert
             e.preventDefault() // megakadalyozom a form viselkedeset
-
-            const inputok1 = e.target.querySelectorAll("input")// letrehozok egy valtozot amibe eltarolom az inputokat
             const elemek = {}// letrehozok egy ures tombot amibe eltarolom az inputokat
-            for(const futo of inputok1){// vegigmegyek az inputokon
-                elemek[futo.id] = futo.value// beallitom az idjat es a valuejat
+            let valid = true // letrehozok egy valtozot ami igaz
+            for(const futo of this.#formFieldArray){// vegigmegyek a formFieldArray elemein
+                futo.error = ""// beallitom az error elemet uresre
+                if(futo.ertek === ''){ // ha a mezo ures
+                    futo.error = "Töltsd ki papi"//akkor beallitom az error elemet
+                    valid = false // beallitom a valid valtozot hamisra
+                }
+                elemek[futo.id] = futo.ertek//az aktuális mező értékét eltárolom az elemek objektumba
             }
+            if(valid){ // ha igaz
             const uj_elemek = new Person(elemek.author,elemek.genre,elemek.title)// letrehozok egy uj person objektumot az elemek adatai alpjan
             this.manager.addPerson(uj_elemek)// hozzadom a managerhez
 
-        })
+        }
+    })
 
 }
 }
