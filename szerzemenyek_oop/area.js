@@ -44,7 +44,18 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
         super(osztaly,manager)// meghivom a szulo osztaly konstruktorat
         const t_body = this.#tablageneralas()// letrehozok egy valtozot amibe eltarolom a #tablageneralas() visszateresi erteket
 
-        this.manager.setAddPersonCallBack((pers) => {// beallitom a setAddPersonCallback metodust
+        this.manager.setAddPersonCallBack((person) => {// beallitom a setAddPersonCallback metodust
+            this.#PersonSorkrealas(person,t_body)// meghivom a #PersonSorkrealas metodust
+        });
+    
+      this.manager.setRenderTableCallBack((personArray) => {// beallitom a setRenderTableCallback metodust
+        t_body.innerHTML = ""// beallitom a tbody innerhtmljat uresre
+        for(const pers of personArray){ // vegigmegyek a personArray tomb elemein
+            this.#PersonSorkrealas(pers,t_body)}//meghivom a PersonSorkrealas metodust
+        })
+    
+    }
+        #PersonSorkrealas(pers,t_body){// letrehozok egy privat metodust ami a person sorokat generalja
             const tr1 = document.createElement("tr")// letrehozok egy tr elemet
 
             const nev_cell = document.createElement("td")// letrehozok egy td elemet
@@ -59,10 +70,10 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
             cim_cell.innerText = pers.cim// beallitom a szoveget
             tr1.appendChild(cim_cell)// hozzadom a sorhoz
             t_body.appendChild(tr1)// hozzadom a tbodyhoz
-        })
-    }
+        }
 
-        #tablageneralas(){ //letrehozok egy tablageneralas privat metodust
+
+        #tablageneralas(){//letrehozok egy tablageneralas privat metodust
         const table = document.createElement("table")// letrehozok egy table elemet
         this.div.appendChild(table)// hozzadom a divhez
         const thead = document.createElement("thead")// letrehozok egy thead elemet
@@ -80,7 +91,10 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
 
         return tbody// visszaadom a tbody elemet
         }
-    }
+} 
+    
+    
+
 
 
 /**

@@ -231,7 +231,7 @@ formForSzures.addEventListener("submit", (e) => {// letrehozok egy eventlistener
     const select = e.target.querySelector('select')// letrehozok egy valtozot amiben eltarolom a selectet
 
     const kivalasztott_array = szures(array, (elem) => {// letrehozok egy valtozot amiben eltarolom a kivalasztott tombot
-        if(select.value === 'author'){// ha a select valueja author
+    if(select.value === 'author'){// ha a select valueja author
             if(szuroinput.value === elem.szerzo){// ha a szuroinput valueja megegyezik a szerzovel
                 return true //true-t ad vissza
         }
