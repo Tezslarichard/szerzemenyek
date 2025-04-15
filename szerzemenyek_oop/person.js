@@ -1,5 +1,5 @@
 /**
- * 
+ * Person osztaly ebbe getterek vannak es egy constructor 
  */
 class Person{//letrehozok egy Person osztalyt
     #szerzo;//csinalok egy private valtozot

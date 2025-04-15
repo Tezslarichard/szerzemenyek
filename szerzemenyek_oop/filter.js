@@ -1,3 +1,7 @@
+/**
+ * Filter osztaly az area az ostalybol szarmazik
+ * 
+ */
 class Filter extends Area{
     constructor(osztaly, manager){// letrehozok egy Filter osztalyt ami az Area osztalybol szarmazik
         super(osztaly, manager)
@@ -35,9 +39,9 @@ class Filter extends Area{
     input.id = 'kivalaszt_input'// beallitom a tipust
     form.appendChild(input)// hozzadom a formhoz
 
-    const button = document.createElement('button')// letrehozok egy button elemet
-    button.innerText = 'Szűrés'// beallitom a szoveget
+    const button = this.buttonkeszites('Szűrés')// letrehozok egy gombot
     form.appendChild(button)// hozzadom a formhoz
+    
     form.addEventListener('submit', (e) => {// letrehozok egy eventet
         e.preventDefault()// megakadalyozom az alapertelmezett viselkedest
         const kivalasztott_opcio = e.target.querySelector('#kivalaszt_input')// beallitom a kivalasztott opciot
