@@ -208,8 +208,9 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
                 elem.error = "Kötelező kitölteni!"// beallitom az error elemet
                 valid = false// beallitom a valid valtozot hamisra
             }
-            return valid// visszaadom a valid valtozot
+            
         }
+        return valid// visszaadom a valid valtozot
     }
     /**
      * Privat metodus amely az urlap mezoinek ertekeit objektumma alakitja
