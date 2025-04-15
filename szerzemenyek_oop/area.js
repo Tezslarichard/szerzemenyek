@@ -21,7 +21,7 @@ class Area{
         const container_tar = this.#ContanerDiv()// letrehozok egy valtozot amibe eltarolom a #ContanerDiv visszateresi erteket
         this.#div = document.createElement("div")// letrehozok egy div elemet
         this.#div.className = osztaly// osztalynevet adok neki
-        d_container.appendChild(this.#div)// hozzadom a containeroop divhez
+        container_tar.appendChild(this.#div)// hozzadom a containeroop divhez
     
     }
         #ContanerDiv(){ //letrehozok egy ContanerDiv privat metodust

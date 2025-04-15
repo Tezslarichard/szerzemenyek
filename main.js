@@ -14,69 +14,62 @@ const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami
     return eredmeny // visszaadom a tombot
 }
 
-const d_container = div1("container") // letrehozok egy divet aminek az osztalya container
-document.body.appendChild(d_container)// hozzadom a bodyhoz
-const d_table = div1("table")// letrehozok egy divet aminek az osztalya table
-const d_form = div1("form")//letrehozok egy divet aminek az osztalya form
-
-
-
-
-
-const table1 = document.createElement("table")// letrehozok egy table elemet
-d_table.appendChild(table1)// hozzadom a table divhez
-
-const fejlec = document.createElement("thead")// letrehozok egy thead elemet
-table1.appendChild(fejlec)// hozzadom a tablehez
-
-const fejsor = document.createElement("tr")// letrehozok egy sort elemet
-fejlec.appendChild(fejsor)// hozzadom a theadhez
-
-const th_ertek = ['Szerző', 'Műfaj','cím'] // eltarolom a fejlec adatait egy valtozoba
-
-for(const fej of th_ertek){// vegigmegyek a th_ertek tomb elemein
-    const th = document.createElement("th")// letrehozok egy th elemet
-    th.innerText = fej// beallitom a szoveget
-    fejsor.appendChild(th)// hozzadom a sorhoz
-}
-
-const tbody = document.createElement("tbody")// letrehozok egy tbody elemet
-table1.appendChild(tbody)// hozzadom a tablehez
-
-
-const formSima = document.createElement("form")// letrehozok egy form elemet
-d_form.appendChild(formSima)// hozzadom a form divhez
-const field_elemek = [{ //csinálok egy tombot amiben eltarolom az elemeket
-    f_id : 'author',//fieldnek givelek idt (americaba been so torom a hungariant)
-    f_label : 'Szerző', // labelnek adok nevet
-    },
-    {
-        f_id :'genre', // fieldnek givelek idt (americaba been so torom a hungariant)
-        f_label : 'Műfaj',// labelnek adok nevet
-    },
-    {
-        f_id : 'title',//  fieldnek givelek idt (americaba been so torom a hungariant)
-        f_label : 'Cím',// labelnek adok nevet
+const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_generalas fuggvenyt
+    const table_div = div1("table")// letrehozok egy divet aminek az osztalya table_div
+    container.appendChild(table_div)// hozzadom a containerhez
+    const table = document.createElement("table")// letrehozok egy table elemet
+    table_div.appendChild(table)// hozzadom a table_divhez
+    const thead = document.createElement("thead")// letrehozok egy thead elemet
+    table.appendChild(thead)// hozzadom a tablehez
+    const tr = document.createElement("tr")// letrehozok egy tr elemet
+    thead.appendChild(tr)// hozzadom a theadhez
+    const fejlec_cella = ['Szerző', 'Műfaj', 'Cím'] // letrehozok egy tombot amiben eltarolom a fejlec cellakat
+    for(const fejlec of fejlec_cella){// vegigmegyek a fejlec cellak elemein
+        const th = document.createElement("th")// letrehozok egy th elemet
+        th.innerText = fejlec// beallitom a szoveget
+        tr.appendChild(th)// hozzadom a sorhoz
     }
-]
-for(const elem of field_elemek){// vegigmegyek a field_elemek tomb elemein
-    const field = div1("field")// letrehozok egy div elemet aminek az osztalya field
-    formSima.appendChild(field)// hozzadom a formhoz
-    const label = document.createElement("label")// letrehozok egy label elemet
-    label.htmlFor = elem.f_id// beallitom az idjat
-    label.textContent = elem.f_label// beallitom a szoveget
-    field.appendChild(label)// hozzadom a fieldhez
-    const br = document.createElement("br")// letrehozok egy sortorest
-    
-    const input = document.createElement("input")// letrehozok egy input elemet
-    input.id = elem.f_id// beallitom az idjat
-    field.appendChild(document.createElement("br"))// hozzadok egy sortorest
-    field.appendChild(input)// hozzadom a fieldhez
-    field.appendChild(br)// hozzadom a fieldhez
-    const span_error = document.createElement("span")// letrehozok egy span elemet
-    span_error.className = "error"// beallitom az osztalyt
-    field.appendChild(span_error)// hozzadom a fieldhez
+    const tbody = document.createElement("tbody")// letrehozok egy tbody elemet
+    table.appendChild(tbody)// hozzadom a tablehez
+    callback(tbody)// meghivom a callbacket a tbodyval
 }
+const form_generalas = (d_container, tbody,array) => { // letrehozok egy form_generalas fuggvenyt
+    const d_form = div1("form")// letrehozok egy divet aminek az osztalya form
+    d_container.appendChild(d_form)// hozzadom a containerhez
+    const formSima = document.createElement("form")// letrehozok egy form elemet
+    d_form.appendChild(formSima)// hozzadom a formhoz
+    const field_elem =[{// //csinálok egy tombot amiben eltarolom az elemeket
+        fieldid: 'author', // letrehozok egy tombot amiben eltarolom a form elemeit
+        fieldLabel: 'Szerző' // beallitom a szoveget
+
+    }
+    ,{
+        fieldid: 'genre', // letrehozok egy tombot amiben eltarolom a form elemeit
+        fieldLabel: 'Műfaj' // beallitom a szoveget
+    }
+    ,{
+        fieldid: 'title', // letrehozok egy tombot amiben eltarolom a form elemeit
+        fieldLabel: 'Cím' // beallitom a szoveget
+    }    
+    ]
+    for(const field of field_elem){ // vegigmegyek a tomb elemein
+        const field1 = document.createElement("field")// letrehozok egy input elemet
+        formSima.appendChild(field1)// hozzadom a formhoz
+        const label = document.createElement("label")// letrehozok egy label elemet
+        label.htmlFor = field.fieldid// beallitom az idjat
+        label.innerText = field.fieldLabel// beallitom a szoveget
+        field1.appendChild(label)// hozzadom a fieldhez
+        field1.appendChild(document.createElement("br"))// hozzadom a fieldhez
+        const input = document.createElement("input")// letrehozok egy input elemet
+        input.id = field.fieldid// beallitom az idjat
+        field1.appendChild(input)// hozzadom a fieldhez
+        field1.appendChild(document.createElement("br"))// hozzadom a fieldhez
+        const error = document.createElement("span")// letrehozok egy div elemet
+        error.className = 'error'// beallitom az osztalyat
+        field1.appendChild(error)// hozzadom a fieldhez
+    }
+
+
 const buttonsima = document.createElement("button")// letrehozok egy button elemet
 buttonsima.textContent = "Hozzáadás"// beallitom a szoveget
 formSima.appendChild(buttonsima)// hozzadom a formhoz
@@ -103,25 +96,33 @@ formSima.addEventListener("submit", (e) => { //hozzadok egy eventlistenert a for
     }
 
 if(valid){ // ha valid
-    array.push(v_object)// hozzadom a tombhoz az uj elemet
-    const tr = document.createElement("tr")// letrehozok egy tr elemet
-    tbody.appendChild(tr)// hozzadom a tbodyhoz
-
-    const nev_cella = document.createElement("td")// letrehozok egy td elemet
-    nev_cella.innerText = v_object.author// beallitom a szoveget
-    tr.appendChild(nev_cella)// hozzadom a sorhoz
-
-    const mufaj_cella = document.createElement("td")// letrehozok egy td elemet
-    mufaj_cella.innerText = v_object.genre// beallitom a szoveget
-    tr.appendChild(mufaj_cella)// hozzadom a sorhoz
-
-    const cim_cella = document.createElement("td")// letrehozok egy td elemet
-    cim_cella.innerText = v_object.title// beallitom a szoveget
-    tr.appendChild(cim_cella)// hozzadom a sorhoz
+    array.push(v_object) // hozzadom a tombhoz az uj elemet
+    sorhoz_adas(tbody, v_object) // meghivom a sorhoz_adas fuggvenyt
 }})
-d_container.appendChild(d_table)// hozzadom a table divet a containerhez
-d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 
+d_container.appendChild(d_form)// hozzadom a form divet a containerhez
+}
+
+const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
+
+        const tr = document.createElement("tr")// letrehozok egy tr elemet
+        tbody.appendChild(tr)// hozzadom a tbodyhoz
+    
+        const nev_cell2 = document.createElement("td")// letrehozok egy td elemet
+        nev_cell2.innerText = elem.szerzo || elem.author// beallitom a szoveget megint minden esetet beirok inkabb
+        tbody.appendChild(nev_cell2)// hozzadom a tbodyhoz
+    
+        const mufaj_cell2 = document.createElement("td")// letrehozok egy td elemet
+        mufaj_cell2.innerText = elem.mufaj || elem.genre// beallitom a szoveget megint minden esetet beirok inkabb
+        tbody.appendChild(mufaj_cell2)// hozzadom a tbodyhoz
+    
+        const cim_cell2 = document.createElement("td")// letrehozok egy td elemet
+        cim_cell2.innerText = elem.cim || elem.title// beallitom a szoveget megint minden esetet beirok inkabb
+        tbody.appendChild(cim_cell2)// hozzadom a tbodyhoz
+    
+}
+
+const fajl_feltoltes1 =(d_container, tbody) =>{ // letrehozok egy fajl feltoltes fuggvenyt
 const fajl_input = document.createElement("input")// letrehozok egy input elemet
 d_container.appendChild(fajl_input)// hozzadom a containerhez
 fajl_input.type = "file"// beallitom a tipusat
@@ -136,7 +137,7 @@ fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
         const felvagottak = sor.trim() // letrehozok egy valtozot amiben eltarolom a felvagott elemeket
         const fields = felvagottak.split(';')// letrehozok egy valtozot amiben eltarolom a felvagott elemeket
 
-        const pers = { //// letrehozok egy valtozot amiben eltarolom a felvagott elemeket
+        const pers = { // letrehozok egy valtozot amiben eltarolom a felvagott elemeket
             szerzo: fields[0],// beallitom a szerzot
             mufaj: fields[1],// beallitom a mufajt
             cim: fields[2]// beallitom a cimet
@@ -162,10 +163,13 @@ fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
 }
 fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
 })
-const exportgomb = document.createElement('button') //letrehozok egy button elemet
- exportgomb.textContent = 'Letöltés' //beallitom a szoveget
- d_container.appendChild(exportgomb) //hozzadom a containerhez
- exportgomb.addEventListener('click', () => {   // letrehozok egy eventlistenert a gombhoz
+}
+const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
+    const exportgomb = document.createElement('button') //letrehozok egy button elemet
+    exportgomb.textContent = 'Letöltés' //beallitom a szoveget
+    d_container.appendChild(exportgomb) //hozzadom a containerhez
+    exportgomb.addEventListener('click', () => {   // letrehozok egy eventlistenert a gombhoz
+
      const link = document.createElement('a') // letrehozok egy a elemet
      const kontent_Array = ['Szerző;Műfaj;Cím'] // letrehozok egy tombot amiben eltarolom a szoveget
      for(const pers of array){ // vegigmegyek a tomb elemein
@@ -178,7 +182,8 @@ const exportgomb = document.createElement('button') //letrehozok egy button elem
      link.click() //meghivom a click fuggvenyt
      URL.revokeObjectURL(link.href) // meghivom a revokeObjectURL fuggvenyt
  })
-
+}
+const szures_form =(d_container, array,tbody) =>{ // letrehozok egy szures formot
  const szures_F_div = div1("filterForm")// letrehozok egy divet aminek az osztalya szures_F_div
  d_container.appendChild(szures_F_div)// hozzadom a containerhez
 
@@ -249,22 +254,18 @@ formForSzures.addEventListener("submit", (e) => {// letrehozok egy eventlistener
 
 
 tbody.innerHTML = ''// uresre allitom a tbodyt
-
-for(const elem of kivalasztott_array){// vegigmegyek a kivalasztott tomb elemein
-    const tr = document.createElement("tr")// letrehozok egy tr elemet
-    tbody.appendChild(tr)// hozzadom a tbodyhoz
-
-    const nev_cell2 = document.createElement("td")// letrehozok egy td elemet
-    nev_cell2.innerText = elem.szerzo || elem.author// beallitom a szoveget megint minden esetet beirok inkabb
-    tbody.appendChild(nev_cell2)// hozzadom a tbodyhoz
-
-    const mufaj_cell2 = document.createElement("td")// letrehozok egy td elemet
-    mufaj_cell2.innerText = elem.mufaj || elem.genre// beallitom a szoveget megint minden esetet beirok inkabb
-    tbody.appendChild(mufaj_cell2)// hozzadom a tbodyhoz
-
-    const cim_cell2 = document.createElement("td")// letrehozok egy td elemet
-    cim_cell2.innerText = elem.cim || elem.title// beallitom a szoveget megint minden esetet beirok inkabb
-    tbody.appendChild(cim_cell2)// hozzadom a tbodyhoz
-
+for(const elem of kivalasztott_array){ // vegigmegyek a kivalasztott tomb elemein
+    sorhoz_adas(tbody, elem) // meghivom a sorhoz_adas fuggvenyt
 }
+
+
+})}
+
+const container_d = div1('container')// letrehozok egy divet aminek az osztalya container
+document.body.appendChild(container_d)// hozzadom a bodyhoz
+tabla_generalas(container_d, (tbody) => { // letrehozok egy tablageneralas fuggvenyt
+  form_generalas(container_d, tbody, array) // meghivom a form_generalas fuggvenyt
+  fajl_feltoltes1(container_d, tbody) // meghivom a fajl_feltoltes fuggvenyt
+  letoltes_gomb(container_d, array) // meghivom a letoltes_gomb fuggvenyt
+  szures_form(container_d, array, tbody) // meghivom a szures_form fuggvenyt
 })
