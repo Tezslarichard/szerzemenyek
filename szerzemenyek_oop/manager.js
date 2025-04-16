@@ -12,7 +12,7 @@
         }
         /**
          * 
-         * @param {Function} callback 
+         * @param {AddCallback} callback 
          */
         setAddPersonCallBack(callback){//letrehozok egy setAddPersonCallBack metodust
             this.#addPersonCallBack = callback// beallitom a callbacket

@@ -1,18 +1,26 @@
 /**
- * * @param {string} osztaly  az osztaly neve
- * * @param {Manager} manager  a manager peldany
- * 
+* Az area osztaly az egesznek az alapja
  */
 class Area{
-
+    /** 
+     * @type {Div}
+     */
     #div; //csinalok egy privat valtozot
 
+    /** 
+     * @type {Manager}
+     */
     #manager;//csinalok egy privat valtozot
 
+    /**
+     * @returns {HTMLDivElement} visszaadja a div elemet
+     */
     get div(){// letrehozok egy gettert ami visszaadja a div elemet
         return this.#div// visszaadom a div elemet
     }
-
+    /**
+     * @returns {Manager} visszaadja a manager elemet
+     */
     get manager(){// letrehozok egy gettert ami visszaadja a manager elemet
         return this.#manager// visszaadom a manager elemet
     }
@@ -20,7 +28,6 @@ class Area{
      * 
      * @param {string} osztaly az osztaly neve
      * @param {Manager} manager  a manager peldany
-     * @returns {HTMLElement}  visszaadja a div elemet
      */
     constructor(osztaly,manager){//letrehozok egy constructort aminek parameterbe megadom az osztalyt
         this.#manager = manager// beallitom a manager privat valtozot
@@ -32,7 +39,7 @@ class Area{
     }
         /**
          * 
-         * @returns {HTMLElement} visszaadja a div elemet
+         * @returns {HTMLDivElement} visszaadja a div elemet
          * 
          */
         #ContanerDiv(){ //letrehozok egy ContanerDiv privat metodust
@@ -45,8 +52,7 @@ class Area{
         return d_container //visszaadom a div elemet
        }
        /**
-        * 
-        * @param {String} label 
+        * @param {String} label ez lesz a button innertextje
         * @returns {HTMLElement} visszaadja a button elemet
         */
        buttonkeszites(label){
@@ -61,9 +67,12 @@ class Area{
  * * @param {string} osztaly  az osztaly neve
  * * @param {Manager} manager  a manager peldany
  * 
- * 
  */
 class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol szarmazik
+    /**
+     * @param {string} osztaly 
+     * @param {Manager} manager 
+     */
     constructor(osztaly , manager){// letrehozok egy constructort es parameterbe megadok valamit
         super(osztaly,manager)// meghivom a szulo osztaly konstruktorat
         const t_body = this.#tablageneralas()// letrehozok egy valtozot amibe eltarolom a #tablageneralas() visszateresi erteket
@@ -73,8 +82,8 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
     }
         /**
          * 
-         * @param {HTMLElement} t_body 
-         * @returns {Function} visszaadja a renderTable callbacket
+         * @param {HTMLElement} t_body tbody az egy html element lesz
+         * @returns {pers[]} pers tombot adja vissza
          */
         #RenderTableCallBack(t_body){// letrehozok egy privat metodust ami a renderelest vegzi
             return (pers) => {// letrehozok egy valtozot amibe eltarolom a person sorokat
@@ -84,10 +93,11 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
                 }
             }
         }  
-          /**
+
+        /**
          * 
-         * @param {HTMLElement} t_body 
-         * @returns {Function} visszaadja a renderTable callbacket
+         * @param {HTMLElement} t_body tbody az egy html element lesz
+         * @returns {pers[]} visszaadja a tombot
          */
         #addPersonCallBack(t_body){// letrehozok egy privat metodust ami a person sorokat generalja
             return (pers) => {// letrehozok egy valtozot amibe eltarolom a person sorokat
@@ -97,8 +107,8 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
     
             /**
              * 
-             * @param {Function} pers callbck lesz a pers
-             * @param {HTMLElement} t_body 
+             * @param {Object} pers person objektum
+             * @param {HTMLElement} t_body htmlelementet adja vissza
              */
             #PersonSorkrealas(pers,t_body){// letrehozok egy privat metodust ami a person sorokat generalja
             const tr1 = document.createElement("tr")// letrehozok egy tr elemet
@@ -108,22 +118,22 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
             this.#CellaKrealas(tr1,pers.cim || pers.title)// meghivom a #CellaKrealas metodust
             t_body.appendChild(tr1)// hozzadom a tbodyhoz
         }
-    /**
-     * 
-     * @param {HTMLElement} tr1  ez egy sor
-     * @param {String} szoveg a belso cella szovege
-     * @param {String} type  ez a tipusa a cellanak
-     */
+        /**
+         *
+         * @param {HtmlElement} tr1  tr1 az egy html elementet csinal
+         * @param {string} szoveg  string lesz
+         * @param {HtmlElement} type td lesz ami htmlelement
+         */
     #CellaKrealas(tr1,szoveg,type='td'){// letrehozok egy privat metodust ami a cellakat generalja
         const td1 = document.createElement(type)// letrehozok egy td elemet
         td1.innerText = szoveg// beallitom a szoveget
         tr1.appendChild(td1)// hozzadom a sorhoz
     }
 
-    /**
-     * 
-     * @returns {HTMLElement} visszaadja a tbody elemet
-     */
+        /**
+         * 
+         * @returns {HTMLElement} visszaadja a tbody elemet
+         */
         #tablageneralas(){//letrehozok egy tablageneralas privat metodust
         const table = document.createElement("table")// letrehozok egy table elemet
         this.div.appendChild(table)// hozzadom a divhez
@@ -146,13 +156,21 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
 
 
 /**
- * A Form osztaly az Area osztalybol szarmazik es urlapokat kezel
- * @param {string} osztaly  Az osztaly neve
- * @param {Array} field_elemek  Az urlap mezoi
- * @param {Manager} manager  A manager paldany
+ * 
+ * ez a formot kepciseli az area leszarmazottja
+ * 
  */
 class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol szarmazik
+    /** 
+     * @type {FormField[]} ez egy arraylesz
+     */
     #formFieldArray; //letrehozok egy privat valtozot
+    /**
+     * 
+     * @param {string} osztaly  
+     * @param {HtmlElement} field_elemek 
+     * @param {Manager} manager 
+     */
     constructor(osztaly,field_elemek,manager){// letrehozok egy constructort es parameterbe megadok valamit
         super(osztaly,manager)// meghivom a szulo osztaly konstruktorat
         this.#formFieldArray = [] // letrehozok egy ures tombot
@@ -162,8 +180,8 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
     }
     /**
      * 
-     * @param {Array} field_elemek_config 
-     * @returns {HTMLElement} visszaadja a form elemet
+     * @param {field_elemek_config[]} field_elemek_config 
+     * @returns {HTMLFormElement} 
      */
     #FormKrealas(field_elemek_config){// letrehozok egy privat metodust ami a formot generalja
         const form1 = document.createElement("form")// letrehozok egy form elemet
@@ -179,11 +197,10 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
         form1.appendChild(button)// hozzadom a formhoz
         return form1// visszaadom a form elemet
     }
-
-    /**
-     * Privat metodus amely az urlap esemenykezelojet adja vissza
-     * @returns {Function}  Az esemenykezelo fuggveny
-     */
+        /**
+         * 
+         * @returns {Function}  Az esemenykezelo fuggveny
+         */
         #Formesemenykezelo(){// letrehozok egy privat metodust ami az esemenykezelo
             return (e) => {// letrehozok egy valtozot amibe eltarolom az esemenykezelo fuggvenyt
                 e.preventDefault()// megakadalyozom az alapertelmezett viselkedest
@@ -196,9 +213,9 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
     }
             
     /**
-     * Privat metodus amely az osszes mezot validalja
-     * @returns {boolean}  A validálás eredménye.
-     */        
+     * 
+     * @returns {boolean}  visszaadja a valid valtozot
+     */      
     #OsszesValidalas(){// letrehozok egy privat metodust ami az osszes validalast vegzi
         let valid = true
 
@@ -213,8 +230,8 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
         return valid// visszaadom a valid valtozot
     }
     /**
-     * Privat metodus amely az urlap mezoinek ertekeit objektumma alakitja
-     * @returns {Object}  Az urlap mezoinek ertekei
+     * 
+     * @returns {Object}  visszaadja az objektumot
      */
     #Objectertek(){// letrehozok egy privat metodust ami az objektumot generalja
     const v_object = {}// letrehozok egy ures objektumot
@@ -229,11 +246,14 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
 
 }
 /**
- * * @param {string} osztaly  az osztaly neve
- * * @param {Manager} manager  a manager peldany
- * 
+ *  A feltoltes es letoltes osztaly az area osztalybol szarmazik
  */
 class Feltoltes_Letoltes extends Area{// letrehozok egy Feltoltes osztalyt ami az Area osztalybol szarmazik
+    /**
+     * 
+     * @param {string} osztaly 
+     * @param {Manager} manager 
+     */
     constructor(osztaly,manager){// letrehozok egy constructort
         super(osztaly,manager)//meghivom a szulo osztaly konstruktorat
         const input = document.createElement("input")// letrehozok egy input elemet
@@ -288,23 +308,45 @@ class Feltoltes_Letoltes extends Area{// letrehozok egy Feltoltes osztalyt ami a
  * A formfield egy urlapot kepvisel
  */
 class FormField{ // letrehozok egy FormField osztalyt
+    /**
+     * @type {id}
+     */
     #id; // privat valtozo
+    /**
+     * @type {inputElemek}
+     */
     #inputElemek; // privat valtozo
+    /**
+     * @type {labelElemek}
+     */
     #labelElemek; // privat valtozo
+    /** 
+     * *@type {errorElemek}
+     */
     #errorElemek; // privat valtozo
-
+    /** 
+     * * @returns {string}  visszaadja az idt
+     */
     get id(){//csinalok egy gettert
         return this.#id // getter ami visszaadja az idt
     }
-
+    /**
+     * @returns {string}  visszaadja az input elemet
+     */
     get ertek(){//csinalok egy gettert
         return this.#inputElemek.value // getter ami visszaadja az input elemet
     }
-
+    /**
+     * * @param {string} ertek  beallitja az error elemet
+     */
     set error(ertek){ // csinalok egy settert
         this.#errorElemek.textContent = ertek // beallitom az error elemet
     }
-
+    /**
+     * 
+     * @param {string} id 
+     * @param {HTMLLabelElement} label 
+     */
     constructor(id,label){ // letrehozok egy constructort
     this.#id = id // beallitom az idt
     this.#labelElemek = document.createElement("label") // letrehozok egy label elemet
@@ -317,7 +359,7 @@ class FormField{ // letrehozok egy FormField osztalyt
     }
     /**
      * 
-     * @returns {HTMLElement}  visszaadja a div elemet
+     * @returns {HTMLDivElement}  visszaadja a div elemet
      */
     getDiv(){// // letrehozok egy metodust
         const div2 = div1("field") // letrehozok egy div elemet aminek az osztalya field

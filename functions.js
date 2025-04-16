@@ -1,18 +1,21 @@
 /**
- * Letrehoz egy div elemet a megadott osztalynevvel
- * @param {string} osztaly  A div osztalyneve
- * @returns {HTMLElement}  A letrehozott div elem
+ * 
+ * @param {string} osztaly div osztalya ezt hozzuk letre
+ * @returns {HTMLDivElement} div elemet hoztuk letre
  */
 const div1 = (osztaly)  => { //div1 valtozoba eltarolok egy arrow functiont  parameterbe megadom az osztalyt
     const div = document.createElement("div")// letrehozok egy div elemet
     div.className = osztaly// osztalynevet adok neki
     return div //visszaadom a div elemet
 }
+
 /**
- * Egy tomb elemeit szuri a megadott callback fuggveny alapjan
- * @param {Array} pers_Array  A szurendo tomb
- * @param {Function} callback  A szuresi feltetelt meghatarozo fuggveny
- * @returns {Array}  A szures eredmenyekent kapott tomb
+ * 
+ * 
+ * @param {pers_Array[]} pers_Array -
+ * @param {} callback  
+ *       
+ * @returns {Array<Object>} 
  */
 const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami parameterbe kap egy tombot es egy callbacket
     const eredmeny = [] // letrehozok egy tombot
@@ -23,11 +26,8 @@ const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami
     }
     return eredmeny // visszaadom a tombot
 }
-/**
- * Letrehoz egy tablazatot a megadott kontenerben, es meghiv egy callback fuggvenyt a tbodyval
- * @param {HTMLElement} container  A tablazatot tartalmazo kontener
- * @param {Function} callback  A tbodyval meghivando fuggveny
- */
+
+
 const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_generalas fuggvenyt
     const table_div = div1("table")// letrehozok egy divet aminek az osztalya table_div
     container.appendChild(table_div)// hozzadom a containerhez
@@ -47,12 +47,7 @@ const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_general
     table.appendChild(tbody)// hozzadom a tablehez
     callback(tbody)// meghivom a callbacket a tbodyval
 }
-/**
- * Letrehoz egy urlapot a megadott kontenerben es kezeli az urlap bekuldeset
- * @param {HTMLElement} d_container  Az urlapot tartalmazo kontener
- * @param {HTMLElement} tbody  A tablazat tbody eleme
- * @param {Array} array  Az adatok tarolasara szolgalo tomb
- */
+
 const form_generalas = (d_container, tbody,array) => { // letrehozok egy form_generalas fuggvenyt
     const d_form = div1("form")// letrehozok egy divet aminek az osztalya form
     d_container.appendChild(d_form)// hozzadom a containerhez
@@ -122,11 +117,7 @@ if(valid){ // ha valid
 
 d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 }
-/**
- * Egy uj sort ad a tablazat tbodyjához az adott elemmel
- * @param {HTMLElement} tbody  A táblázat tbody eleme
- * @param {Object} elem  Az uj sor adatai
- */
+
 const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
 
         const tr = document.createElement("tr")// letrehozok egy tr elemet
@@ -145,11 +136,7 @@ const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
         tbody.appendChild(cim_cell2)// hozzadom a tbodyhoz
     
 }
-/**
- * Fajl feltolteset kezeli es a fajl tartalmat hozzaadja a tablazathoz
- * @param {HTMLElement} d_container  A feltolteshez tartozo kontener
- * @param {HTMLElement} tbody  A tablazat tbody eleme
- */
+
 const fajl_feltoltes1 =(d_container, tbody) =>{ // letrehozok egy fajl feltoltes fuggvenyt
 const fajl_input = document.createElement("input")// letrehozok egy input elemet
 d_container.appendChild(fajl_input)// hozzadom a containerhez
@@ -192,11 +179,7 @@ fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
 fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
 })
 }
-/**
- * Letrehoz egy letoltes gombot
- * @param {HTMLElement} d_container  A letolteshez tartozo kontener
- * @param {Array} array  Az exportalando adatok tombje
- */
+
 const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
     const exportgomb = document.createElement('button') //letrehozok egy button elemet
     exportgomb.textContent = 'Letöltés' //beallitom a szoveget
@@ -216,12 +199,7 @@ const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
      URL.revokeObjectURL(link.href) // meghivom a revokeObjectURL fuggvenyt
  })
 }
-/**
- * Letrehoz egy szuro urlapot amely a tablazat tartalmat szuri
- * @param {HTMLElement} d_container  A szűrő űrlap konténere
- * @param {Array} array  A szurendo adatok tombje
- * @param {HTMLElement} tbody  A tablazat tbody eleme
- */
+
 const szures_form =(d_container, array,tbody) =>{ // letrehozok egy szures formot
  const szures_F_div = div1("filterForm")// letrehozok egy divet aminek az osztalya szures_F_div
  d_container.appendChild(szures_F_div)// hozzadom a containerhez
