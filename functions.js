@@ -12,10 +12,9 @@ const div1 = (osztaly)  => { //div1 valtozoba eltarolok egy arrow functiont  par
 /**
  * 
  * 
- * @param {pers_Array[]} pers_Array -
- * @param {} callback  
- *       
- * @returns {Array<Object>} 
+ * @param {pers_Array[]} pers_Array 
+ * @param {Function} callback   
+ * @returns {eredmeny[]} eredmeny tombot ad vissza
  */
 const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami parameterbe kap egy tombot es egy callbacket
     const eredmeny = [] // letrehozok egy tombot
@@ -27,7 +26,11 @@ const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami
     return eredmeny // visszaadom a tombot
 }
 
-
+/**
+ * 
+ * @param {HTMLElement} container 
+ * @param {Function} callback 
+ */
 const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_generalas fuggvenyt
     const table_div = div1("table")// letrehozok egy divet aminek az osztalya table_div
     container.appendChild(table_div)// hozzadom a containerhez
@@ -47,7 +50,12 @@ const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_general
     table.appendChild(tbody)// hozzadom a tablehez
     callback(tbody)// meghivom a callbacket a tbodyval
 }
-
+/**
+ * 
+ * @param {HTMLElement} d_container 
+ * @param {HTMLElement} tbody 
+ * @param {Object} array 
+ */
 const form_generalas = (d_container, tbody,array) => { // letrehozok egy form_generalas fuggvenyt
     const d_form = div1("form")// letrehozok egy divet aminek az osztalya form
     d_container.appendChild(d_form)// hozzadom a containerhez
@@ -117,7 +125,11 @@ if(valid){ // ha valid
 
 d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 }
-
+/**
+ * 
+ * @param {HTMLElement} tbody 
+ * @param {Object} elem 
+ */
 const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
 
         const tr = document.createElement("tr")// letrehozok egy tr elemet
@@ -136,7 +148,11 @@ const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
         tbody.appendChild(cim_cell2)// hozzadom a tbodyhoz
     
 }
-
+/**
+ * 
+ * @param {HTMLElement} d_container 
+ * @param {HTMLElement} tbody 
+ */
 const fajl_feltoltes1 =(d_container, tbody) =>{ // letrehozok egy fajl feltoltes fuggvenyt
 const fajl_input = document.createElement("input")// letrehozok egy input elemet
 d_container.appendChild(fajl_input)// hozzadom a containerhez
@@ -179,7 +195,11 @@ fajl_olvaso.onload = () => {//letrehozok egy eventlistenert az olvasora
 fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
 })
 }
-
+/**
+ * 
+ * @param {HTMLElement} d_container 
+ * @param {Object} array 
+ */
 const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
     const exportgomb = document.createElement('button') //letrehozok egy button elemet
     exportgomb.textContent = 'Letöltés' //beallitom a szoveget
@@ -199,7 +219,12 @@ const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
      URL.revokeObjectURL(link.href) // meghivom a revokeObjectURL fuggvenyt
  })
 }
-
+/**
+ * 
+ * @param {HTMLElement} d_container 
+ * @param {Object} array 
+ * @param {HTMLElement} tbody 
+ */
 const szures_form =(d_container, array,tbody) =>{ // letrehozok egy szures formot
  const szures_F_div = div1("filterForm")// letrehozok egy divet aminek az osztalya szures_F_div
  d_container.appendChild(szures_F_div)// hozzadom a containerhez

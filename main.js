@@ -1,13 +1,5 @@
-/**
- * Egy ures tomb, amely az alkalmazas adatait tarolja.
- * @type {Array}
- */
 const array = [] // letrehozok egy tombot
 
-/**
- * 
- * @type {HTMLElement}
- */
 const container_d = div1('container')// letrehozok egy divet aminek az osztalya container
 document.body.appendChild(container_d)// hozzadom a bodyhoz
 tabla_generalas(container_d, (tbody) => { // letrehozok egy tablageneralas fuggvenyt

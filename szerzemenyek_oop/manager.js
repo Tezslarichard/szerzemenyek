@@ -2,17 +2,28 @@
      * A manager osztaly kezeli a fuggvenyeket
      */
     class Manager{// letrehozok egy manager osztalyt
+        /**
+         * @type {array} array
+         */
         #array;//  letrehozok egy privat valtozot
+        /**
+         * @type {AddCallback} addPersonCallBack
+         */
         #addPersonCallBack;//  letrehozok egy privat callbacket
+        /**
+         * @type {renderTableCallBack}
+         */
         #renderTableCallBack;//  letrehozok egy privat renderTable callbacket
-
+        /**
+         * nem kell ide irni nagyon semmit
+         */
         constructor(){// letrehozok egy constructort
             this.#array = [] // letrehozok egy tombot
             
         }
         /**
          * 
-         * @param {AddCallback} callback 
+         * @param {Function} callback 
          */
         setAddPersonCallBack(callback){//letrehozok egy setAddPersonCallBack metodust
             this.#addPersonCallBack = callback// beallitom a callbacket
@@ -47,7 +58,7 @@
     }
     /**
      * 
-     * @returns {Array}
+     * @returns {kontent_Array[]} egy tombot fog visszaadni
      */
     generateExportString(){// letrehozok egy generateExportString metodust
         const kontent_Array = ['Szerző;Műfaj;Cím'] // letrehozok egy tombot amiben eltarolom a szoveget

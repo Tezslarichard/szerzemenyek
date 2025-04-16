@@ -83,7 +83,7 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
         /**
          * 
          * @param {HTMLElement} t_body tbody az egy html element lesz
-         * @returns {pers[]} pers tombot adja vissza
+         * @returns {(pers: Array<Object>) => void} 
          */
         #RenderTableCallBack(t_body){// letrehozok egy privat metodust ami a renderelest vegzi
             return (pers) => {// letrehozok egy valtozot amibe eltarolom a person sorokat
@@ -97,7 +97,7 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
         /**
          * 
          * @param {HTMLElement} t_body tbody az egy html element lesz
-         * @returns {pers[]} visszaadja a tombot
+         * @returns {pers: Array<Object>} visszaadja a tombot
          */
         #addPersonCallBack(t_body){// letrehozok egy privat metodust ami a person sorokat generalja
             return (pers) => {// letrehozok egy valtozot amibe eltarolom a person sorokat
@@ -107,7 +107,7 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
     
             /**
              * 
-             * @param {Object} pers person objektum
+             * @param {author:string: genre:string: title:string} pers person objektum
              * @param {HTMLElement} t_body htmlelementet adja vissza
              */
             #PersonSorkrealas(pers,t_body){// letrehozok egy privat metodust ami a person sorokat generalja
@@ -122,7 +122,7 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
          *
          * @param {HtmlElement} tr1  tr1 az egy html elementet csinal
          * @param {string} szoveg  string lesz
-         * @param {HtmlElement} type td lesz ami htmlelement
+         * @param {string} type td lesz ami htmlelement
          */
     #CellaKrealas(tr1,szoveg,type='td'){// letrehozok egy privat metodust ami a cellakat generalja
         const td1 = document.createElement(type)// letrehozok egy td elemet
@@ -168,7 +168,7 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
     /**
      * 
      * @param {string} osztaly  
-     * @param {HtmlElement} field_elemek 
+     * @param {HTMLFormElement} field_elemek 
      * @param {Manager} manager 
      */
     constructor(osztaly,field_elemek,manager){// letrehozok egy constructort es parameterbe megadok valamit
@@ -180,7 +180,7 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
     }
     /**
      * 
-     * @param {field_elemek_config[]} field_elemek_config 
+     * @param {id: string, label : string} field_elemek_config 
      * @returns {HTMLFormElement} 
      */
     #FormKrealas(field_elemek_config){// letrehozok egy privat metodust ami a formot generalja
@@ -199,7 +199,7 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
     }
         /**
          * 
-         * @returns {Function}  Az esemenykezelo fuggveny
+         * @returns {EventListener} itt hivjuk meg
          */
         #Formesemenykezelo(){// letrehozok egy privat metodust ami az esemenykezelo
             return (e) => {// letrehozok egy valtozot amibe eltarolom az esemenykezelo fuggvenyt
@@ -231,7 +231,7 @@ class Form extends Area{ // letrehozok egy Form osztalyt ami az Area osztalybol 
     }
     /**
      * 
-     * @returns {Object}  visszaadja az objektumot
+     * @returns {id: string, ertek: string}  visszaadja az objektumot
      */
     #Objectertek(){// letrehozok egy privat metodust ami az objektumot generalja
     const v_object = {}// letrehozok egy ures objektumot
@@ -268,7 +268,7 @@ class Feltoltes_Letoltes extends Area{// letrehozok egy Feltoltes osztalyt ami a
     }     
         /**
          * 
-         * @returns {Function}  Az esemenykezelo fuggveny
+         * @returns {EventListener}  Az esemenykezelo fuggveny
          */
         #ExportButtonEsemeny(){// letrehozok egy privat metodust ami az exportot vegz
             return () => {// letrehozok egy valtozot amibe eltarolom az esemenykezelo fuggvenyt
@@ -283,7 +283,7 @@ class Feltoltes_Letoltes extends Area{// letrehozok egy Feltoltes osztalyt ami a
        }
        /**
         * 
-        * @returns {Function}  Az esemenykezelo fuggveny
+        * @returns {EventListener}  Az esemenykezelo ad vissza
         */
         #importInputEsemeny(){// letrehozok egy privat metodust ami az importot vegzi
             return(e) => {// letrehozok egy valtozot amibe eltarolom az esemenykezelo fuggvenyt
