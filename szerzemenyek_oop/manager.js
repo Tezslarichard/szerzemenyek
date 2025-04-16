@@ -23,21 +23,21 @@
         }
         /**
          * 
-         * @param {Function} callback 
+         * @param {AddPersonCallBack} callback 
          */
         setAddPersonCallBack(callback){//letrehozok egy setAddPersonCallBack metodust
             this.#addPersonCallBack = callback// beallitom a callbacket
         }
         /**
          * 
-         * @param {Function} callback 
+         * @param {RenderTableCallBack} callback
          */
         setRenderTableCallBack(callback){// letrehozok egy setRenderTableCallBack metodust
             this.#renderTableCallBack = callback// beallitom a callbacket
         }
         /**
          * 
-         * @param {Object} elem
+         * @param {Person} elem
          */
         addPerson(elem){// letrehozok egy addPerson metodust
             this.#array.push(elem)// hozzadom a tombhoz
@@ -45,7 +45,7 @@
         }
     /**
      * 
-     * @param {Function} callback 
+     * @param {eredmeny} callback 
      */
     filter(callback){
         const eredmeny = []

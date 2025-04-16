@@ -1,3 +1,7 @@
+/**
+ * @typedef {author:string, genre:string, title:string} kontent_Array
+ * @type {kontent_Array[]}
+ */
 const array = [] // letrehozok egy tombot
 
 const container_d = div1('container')// letrehozok egy divet aminek az osztalya container

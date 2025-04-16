@@ -97,7 +97,7 @@ class Table extends Area{// letrehozok egy Table osztalyt ami az Area osztalybol
         /**
          * 
          * @param {HTMLElement} t_body tbody az egy html element lesz
-         * @returns {pers: Array<Object>} visszaadja a tombot
+         * @returns {AddPersonCallBack} visszaadja a tombot
          */
         #addPersonCallBack(t_body){// letrehozok egy privat metodust ami a person sorokat generalja
             return (pers) => {// letrehozok egy valtozot amibe eltarolom a person sorokat

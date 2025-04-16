@@ -13,8 +13,8 @@ const div1 = (osztaly)  => { //div1 valtozoba eltarolok egy arrow functiont  par
  * 
  * 
  * @param {pers_Array[]} pers_Array 
- * @param {Function} callback   
- * @returns {eredmeny[]} eredmeny tombot ad vissza
+ * @param {(function: pers_Array): boolean} callback   
+ * @returns {pers_Array[]}
  */
 const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami parameterbe kap egy tombot es egy callbacket
     const eredmeny = [] // letrehozok egy tombot
@@ -29,7 +29,7 @@ const szures = (pers_Array, callback) =>{ // letrehozok egy szures fuggvenyt ami
 /**
  * 
  * @param {HTMLElement} container 
- * @param {Function} callback 
+ * @param {Function(HTMLFormElement): void} callback 
  */
 const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_generalas fuggvenyt
     const table_div = div1("table")// letrehozok egy divet aminek az osztalya table_div
@@ -53,8 +53,8 @@ const tabla_generalas = (container, callback,)=>{// letrehozok egy tabla_general
 /**
  * 
  * @param {HTMLElement} d_container 
- * @param {HTMLElement} tbody 
- * @param {Object} array 
+ * @param {HTMLSelectionElement} tbody 
+ * @param {author: string, genre:string,title: string} array 
  */
 const form_generalas = (d_container, tbody,array) => { // letrehozok egy form_generalas fuggvenyt
     const d_form = div1("form")// letrehozok egy divet aminek az osztalya form
@@ -127,8 +127,8 @@ d_container.appendChild(d_form)// hozzadom a form divet a containerhez
 }
 /**
  * 
- * @param {HTMLElement} tbody 
- * @param {Object} elem 
+ * @param {HTMLSelectElement} tbody 
+ * @param {author:string, genre:string, title:string} elem 
  */
 const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
 
@@ -151,7 +151,8 @@ const sorhoz_adas = (tbody,elem) =>{ // letrehozok egy sorhoz adas fuggvenyt
 /**
  * 
  * @param {HTMLElement} d_container 
- * @param {HTMLElement} tbody 
+ * @param {HTMLTableSectionElement} tbody
+ * @param {author:string, genre:string, title:string} array
  */
 const fajl_feltoltes1 =(d_container, tbody) =>{ // letrehozok egy fajl feltoltes fuggvenyt
 const fajl_input = document.createElement("input")// letrehozok egy input elemet
@@ -198,7 +199,7 @@ fajl_olvaso.readAsText(fajl)// beallitom hogy szoveg legyen
 /**
  * 
  * @param {HTMLElement} d_container 
- * @param {Object} array 
+ * @param {author:string, genre:string, title:string} array
  */
 const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
     const exportgomb = document.createElement('button') //letrehozok egy button elemet
@@ -221,9 +222,9 @@ const letoltes_gomb =(d_container, array)=>{ // letrehozok egy gombot
 }
 /**
  * 
- * @param {HTMLElement} d_container 
- * @param {Object} array 
- * @param {HTMLElement} tbody 
+ * @param {HTMLElement} d_container
+ * @param {author:string, genre:string, title:string} array
+ * @param {HTMLElement} tbody
  */
 const szures_form =(d_container, array,tbody) =>{ // letrehozok egy szures formot
  const szures_F_div = div1("filterForm")// letrehozok egy divet aminek az osztalya szures_F_div
